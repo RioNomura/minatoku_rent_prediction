@@ -5,6 +5,10 @@ from sklearn.svm import SVR
 import lightgbm as lgb
 import matplotlib.pyplot as plt
 import pandas as pd
+import joblib
+import onnxmltools
+from skl2onnx import convert_sklearn
+from skl2onnx.common.data_types import FloatTensorType
 #import japanize_matplotlib
 
 # データの読み込み
@@ -98,3 +102,6 @@ feature_importance = feature_importance.sort_values('importance', ascending=Fals
 print("\n特徴量重要度:")
 for index, row in feature_importance.iterrows():
     print(f"{row['feature']}: {row['importance']}")
+
+# モデルを保存
+joblib.dump(model_4, 'rent_prediction_model.joblib')
